@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Classic 531</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="wrapper" id="app">
+        <div class="table table__intro">
+            <div class="table__header table__header--small" v-on:click="toggleClass">Explanations<button class="wrap-window"></button></div>
+            <div class="table__intro__content table__content--hide">
+                <p>Your training maxes will be calculated at 90% of your true max.</p>
+                <p>The general rule of thumb is to use 50-60% of your Training Max for the 5 sets of 10 reps. (The app take 50%)</p>
+                <progression-list
+                    v-bind:unit="unit"
+                    v-bind:roundvalue="roundUpToNearestQuarter"
+                >
+                </progression-list>
+            </div>
+        </div>
+        <div class="table">
+            <div class="table__header">NSuns 531</button></div>
+
+            <div>
+                <div class="table__row">
+                    <select name="" id="" v-model="currentMicroCycle" v-on:change="updateMicroCycle">
+                        <option value="microCycle1">Micro cycle 1</option>
+                        <option value="microCycle2">Micro cycle 2</option>
+                        <option value="microCycle3">Micro cycle 3</option>
+                        <option value="microCycle4">Micro cycle 4</option>
+                    </select>
+                </div>
+                <div class="table__row">
+                    <div class="table__cell--quart table__cell--quart--hl">Variation</div>
+                    <div class="table__cell--threequarter">
+                        <select name="" id="" v-model="currentVariationValue" v-on:change="updateVariationProgram">
+                            <option value="boringButBig">Boring But Big</option>
+                            <option value="triumvirate">Triumvirate</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table__row">
+                    <div class="table__cell--quart table__cell--quart--hl">Units</div>
+                    <div class="table__cell--threequarter">
+                        <select name="" id="" v-model="unit" v-on:change="weightConverter">
+                            <option value="kg">kg</option>
+                            <option value="lb">lb</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table__row table__row--justify-right">
+                <div class="table__cell--threequarter">
+                    <button v-on:click="addWeight">Add weight</button>
+                </div>
+                </div>
+                <primary-exercice-item 
+                    v-for="exercice in exercices" 
+                    v-bind:element="exercice"
+                    v-bind:repetionmax="calculateRepetitionMax"
+                    v-bind:trainingmax="calculateTrainingMax"
+                    v-bind:roundvalue="roundUpToNearestQuarter"
+                    v-bind:unit="unit"
+                >
+                </primary-exercice-item>
+
+            </div>
+
+        </div>
+
+        <div class="table">
+            <div class="table__header" v-on:click="toggleClass">Monday <span class="wrap-window"></span></div>
+
+            <div class="table__content table__content--hide">
+                <div class="table__header--subheader">{{ exercices.overheadPress.name }}</div>
+
+                    <row-set-item
+                        v-for="(set, index) in microCycle"
+                        v-bind:set="set"
+                        v-bind:sets="microCycle"
+                        v-bind:index="index"
+                        v-bind:exercice='exercices.overheadPress'
+                        v-bind:isprimaryexercice="true"
+                        v-bind:unit="unit"
+                    >
+                    </row-set-item>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.overheadPress.first }}</div>
+
+                    <row-set-item
+                        v-for="(set, index) in currentVariation.setsAssistances.first"
+                        v-bind:set="set"
+                        v-bind:sets="currentVariation.setsAssistances.first"
+                        v-bind:index="index"
+                        v-bind:exercice='exercices.overheadPress'
+                        v-bind:isprimaryexercice="false"
+                        v-bind:unit="unit"
+                    >
+                    </row-set-item>
+                
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.overheadPress.second }}</div>
+                <div class="table__row table__row--set table__row--set--lastAssistance">
+                    <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table">
+            <div class="table__header" v-on:click="toggleClass">Tuesday <span class="wrap-window"></span></div>
+
+            <div class="table__content table__content--hide">
+                <div class="table__header--subheader">{{ exercices.deadlift.name }}</div>
+
+                <row-set-item
+                    v-for="(set, index) in microCycle"
+                    v-bind:set="set"
+                    v-bind:sets="microCycle"
+                    v-bind:index="index"
+                    v-bind:exercice='exercices.deadlift'
+                    v-bind:isprimaryexercice="true"
+                    v-bind:unit="unit"
+                >
+                </row-set-item>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.deadlift.first }}</div>
+                <row-set-item
+                    v-for="(set, index) in currentVariation.setsAssistances.first"
+                    v-bind:set="set"
+                    v-bind:sets="currentVariation.setsAssistances.first"
+                    v-bind:index="index"
+                    v-bind:exercice='exercices.deadlift'
+                    v-bind:isprimaryexercice="false"
+                    v-bind:unit="unit"
+                >
+                </row-set-item>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.deadlift.second }}</div>
+                <div class="table__row table__row--set table__row--set--lastAssistance">
+                    <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table">
+            <div class="table__header" v-on:click="toggleClass">Thursday <span class="wrap-window"></span></div>
+
+            <div class="table__content table__content--hide">
+                <div class="table__header--subheader">{{ exercices.bench.name }}</div>
+
+                <row-set-item
+                    v-for="(set, index) in microCycle"
+                    v-bind:set="set"
+                    v-bind:sets="microCycle"
+                    v-bind:index="index"
+                    v-bind:exercice='exercices.bench'
+                    v-bind:isprimaryexercice="true"
+                    v-bind:unit="unit"
+                >
+                </row-set-item>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.first }}</div>
+                <row-set-item
+                    v-for="(set, index) in currentVariation.setsAssistances.first"
+                    v-bind:set="set"
+                    v-bind:sets="currentVariation.setsAssistances.first"
+                    v-bind:index="index"
+                    v-bind:exercice='exercices.bench'
+                    v-bind:isprimaryexercice="false"
+                    v-bind:unit="unit"
+                >
+                </row-set-item>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.second }}</div>
+                <div class="table__row table__row--set table__row--set--lastAssistance">
+                    <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table">
+                <div class="table__header" v-on:click="toggleClass">Friday <span class="wrap-window"></span></div>
+    
+                <div class="table__content table__content--hide">
+                    <div class="table__header--subheader">{{ exercices.squat.name }}</div>
+    
+                    <row-set-item
+                        v-for="(set, index) in microCycle"
+                        v-bind:set="set"
+                        v-bind:sets="microCycle"
+                        v-bind:index="index"
+                        v-bind:exercice='exercices.squat'
+                        v-bind:isprimaryexercice="true"
+                        v-bind:unit="unit"
+                    >
+                    </row-set-item>
+    
+                    <div class="table__header--subheader">{{ currentVariation.assistancesExercices.squat.first }}</div>
+                    <row-set-item
+                        v-for="(set, index) in currentVariation.setsAssistances.first"
+                        v-bind:set="set"
+                        v-bind:sets="currentVariation.setsAssistances.first"
+                        v-bind:index="index"
+                        v-bind:exercice='exercices.squat'
+                        v-bind:isprimaryexercice="false"
+                        v-bind:unit="unit"
+                    >
+                    </row-set-item>
+    
+                    <div class="table__header--subheader">{{ currentVariation.assistancesExercices.squat.second }}</div>
+                    <div class="table__row table__row--set table__row--set--lastAssistance">
+                        <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
+                    </div>
+                </div>
+    
+            </div>
+
+    </div>
+
+    <script src="app/app.js"></script>
+</body>
+</html>

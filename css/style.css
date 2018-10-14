@@ -1,0 +1,253 @@
+body {
+    background: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input {
+    line-height: 30px;
+    height: 30px; 
+    border: none;
+    padding: 5px;
+    display: block;
+    width: calc(100% - 60px);
+    margin: auto;
+}
+
+button {
+    width: 100%;
+    line-height: 32px;
+    background: #afc8de;
+    border: 1px solid;
+    color: #fff;
+    cursor: pointer;
+}
+
+select {
+    width: 100%;
+    height: 30px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.explanations {
+    margin-top: 20px;
+}
+
+.input-container {
+    position: relative;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.input-container + .input-container {
+    margin-left: 10px;
+}
+
+.input-container:before {
+    background-color: #85ada7;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 30px;
+    color: #fff;
+    width: 30px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.input-container.is-rm:before {
+    content: "RM";
+}
+
+.input-container.is-tm:before {
+    content: "TM";
+}
+
+.unit-input {
+    text-align: center;
+    width: 30px;
+    height: 100%;
+    line-height: 30px;
+    background-color: #ececec;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 0 5px;
+}
+
+.wrapper {
+    padding: 0 20px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.table {
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.table__intro + .table{
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.table__intro {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.table__intro p,
+.table__intro ul {
+    font-size: 13px;
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+.table__intro ul {
+    margin-top: 10px;
+}
+
+.table__intro p + p {
+    margin-top: 10px;
+}
+
+.table__intro__content {
+    padding: 10px 0;
+    margin: 0 10px;
+}
+
+.table__header {
+    background-color: #44a091;
+    color: #fff;
+    font-size: 18px;
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.table__header--small {
+    background-color: #adadad;
+    padding: 10px;
+}
+
+.table__header.active .wrap-window:before  {
+    transform: rotate(180deg);
+    transition: transform ease-out .2s;
+}
+
+.wrap-window {
+    margin-left: auto;
+    font-size: 20px;
+    color: currentColor;
+    background: none;
+    border: none;
+    width: 30px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.wrap-window:before {
+    content: "";
+    background: url("../assets/arrow.svg") center no-repeat;
+    width: 100%;
+    height: 21px;
+    display: block;
+    transform: rotate(0deg);
+    transition: transform ease-out .2s;
+}
+
+.table__content--hide {
+    display: none;
+}
+
+.table__row {
+    flex: 1;
+    font-size: 15px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.table__row--justify-right {
+    justify-content: flex-end;
+}
+
+.table__row--set {
+    border-top: 1px solid #f2f2f2;
+    position: relative;
+    text-align: center;
+    padding: 15px;
+}
+
+.table__row--set > p {
+    padding-left: 30px;
+}
+
+.table__row--set--lastAssistance {
+    justify-content: center;
+}
+
+.table__row--set--lastAssistance > p {
+    padding-left: 0;
+}
+
+.table__row--hl {
+    background-color: #f7f7f7;
+}
+
+
+.table__cell {
+    flex: 1;
+}
+
+.table__header--subheader {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+    padding: 10px;
+    color: #666666;
+}
+
+.table__cell--third {
+    width: 40%;
+}
+
+.table__cell--threequarter {
+    width: 80%;
+}
+
+.table__cell--quart {
+    width: 20%;
+}
+
+.table__cell--quart--hl {
+    color: #85ada7;
+    font-weight: bold;
+}
+
+.repet-number {
+    color: #44a091;
+    font-weight: bold;
+}
+
+.weight-item {
+    color: #000;
+}
