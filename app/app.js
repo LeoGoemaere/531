@@ -26,11 +26,12 @@ const variationsPrograms = {
         assistancesExercices: {
             squat: {
                 first: 'Squat',
-                second: 'Dips'
+                second: 'Abs'
             },
             bench: {
                 first: 'Bench',
-                second: 'Chin up'
+                second: 'Chin up',
+                third: 'Dips'
             },
             deadlift: {
                 first: 'Deadlift',
@@ -50,6 +51,10 @@ const variationsPrograms = {
                 { tm: 0.50, reps: 10 }
             ],
             second: {
+                reps: 10,
+                sets: 5
+            },
+            third: {
                 reps: 10,
                 sets: 5
             }

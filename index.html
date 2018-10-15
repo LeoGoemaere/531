@@ -17,6 +17,7 @@
             <div class="table__intro__content table__content--hide">
                 <p>Your training maxes will be calculated at 90% of your true max.</p>
                 <p>The general rule of thumb is to use 50-60% of your Training Max for the 5 sets of 10 reps. (The app take 50%)</p>
+                <p>More infos <a href="https://www.reddit.com/r/Fitness/wiki/531-beginners" target="_blank">here</a>.</p>
                 <progression-list
                     v-bind:unit="unit"
                     v-bind:roundvalue="roundUpToNearestQuarter"
@@ -180,6 +181,11 @@
                 <div class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.second }}</div>
                 <div class="table__row table__row--set table__row--set--lastAssistance">
                     <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
+                </div>
+
+                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.third }}</div>
+                <div class="table__row table__row--set table__row--set--lastAssistance">
+                    <p>{{ currentVariation.setsAssistances.third.sets }} sets of {{ currentVariation.setsAssistances.third.reps }} reps</p>
                 </div>
             </div>
 
