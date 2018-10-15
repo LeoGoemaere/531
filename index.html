@@ -184,8 +184,9 @@
                     <p>{{ currentVariation.setsAssistances.second.sets }} sets of {{ currentVariation.setsAssistances.second.reps }} reps</p>
                 </div>
 
-                <div class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.third }}</div>
-                <div class="table__row table__row--set table__row--set--lastAssistance">
+                <b v-if="currentVariation.setsAssistances.third">hey</b>
+                <div v-if="currentVariation.setsAssistances.third" class="table__header--subheader">{{ currentVariation.assistancesExercices.bench.third }}</div>
+                <div v-if="currentVariation.setsAssistances.third" class="table__row table__row--set table__row--set--lastAssistance">
                     <p>{{ currentVariation.setsAssistances.third.sets }} sets of {{ currentVariation.setsAssistances.third.reps }} reps</p>
                 </div>
             </div>
