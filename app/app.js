@@ -95,22 +95,30 @@ const cycle = {
     microCycle1: [
         { tm: 0.65, reps: 5 },
         { tm: 0.75, reps: 5 },
-        { tm: 0.85, reps: 5 }
+        { tm: 0.85, reps: 5 },
+        { tm: 0.75, reps: 5 },
+        { tm: 0.65, reps: 5 }
     ],
     microCycle2: [
         { tm: 0.70, reps: 3 },
         { tm: 0.80, reps: 3 },
-        { tm: 0.90, reps: 3 }
+        { tm: 0.90, reps: 3 },
+        { tm: 0.80, reps: 3 },
+        { tm: 0.70, reps: 3 }
     ],
     microCycle3: [
         { tm: 0.75, reps: 5 },
         { tm: 0.85, reps: 3 },
-        { tm: 0.95, reps: 1 }
+        { tm: 0.95, reps: 1 },
+        { tm: 0.85, reps: 3 },
+        { tm: 0.75, reps: 5 }
     ],
     microCycle4: [
         { tm: 0.40, reps: 5 },
         { tm: 0.50, reps: 5 },
-        { tm: 0.60, reps: 5 }
+        { tm: 0.60, reps: 5 },
+        { tm: 0.50, reps: 5 },
+        { tm: 0.40, reps: 5 }
     ]
 };
 
@@ -145,7 +153,7 @@ Vue.component('row-set-item', {
     template: `
         <div v-if="typeof sets[index].tm !== 'undefined'" class="table__row table__row--set">
             <span class="item-number">{{ index + 1 }}</span>
-            <p><span class="repet-number"> {{set.reps}} {{ isprimaryexercice && sets.length - 1 === index ? '+' : null }} </span> @ <span class="weight-item">{{ Math.ceil( ((exercice.tm) * (set.tm)) * 4) / 4 }}</span> {{ unit }}</p>   
+            <p><span class="repet-number"> {{set.reps}} {{ isprimaryexercice && sets.length - 1 === index || index === 2 ? '+' : null }} </span> @ <span class="weight-item">{{ Math.ceil( ((exercice.tm) * (set.tm)) * 4) / 4 }}</span> {{ unit }}</p>   
         </div>
         <div v-else class="table__row table__row--set table__row--set--lastAssistance">
             <p>{{ sets[index].sets }} sets of {{ sets[index].reps }} reps</p>
