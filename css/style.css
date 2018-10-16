@@ -195,6 +195,14 @@ ul {
     padding: 15px;
 }
 
+.table__row--set--joker {
+    background-color: #ffffda;
+}
+
+.table__row--set--firstLastSet {
+    background-color: #e5e9ff;
+}
+
 .table__row--set > p {
     padding-left: 30px;
 }
@@ -250,4 +258,16 @@ ul {
 
 .weight-item {
     color: #000;
+}
+
+.joker-label,
+.fsl-label {
+    margin-left: auto;
+}
+
+.add-joker-set {
+    background: none;
+    width: 30px;
+    color: currentColor;
+    border: none;
 }

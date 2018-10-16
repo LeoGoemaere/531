@@ -39,7 +39,8 @@ const variationsPrograms = {
             },
             overheadPress: {
                 first: 'OHP',
-                second: 'T-bar'
+                second: 'T-bar',
+                joker: []
             },
         },
         setsAssistances: {
@@ -81,7 +82,10 @@ const variationsPrograms = {
         },
         setsAssistances: {
             first: [
-                { reps: 15, sets: 5 }
+                {
+                    reps: 15, 
+                    sets: 5 
+                }
             ],
             second: {
                 reps: 10,
@@ -95,32 +99,46 @@ const cycle = {
     microCycle1: [
         { tm: 0.65, reps: 5 },
         { tm: 0.75, reps: 5 },
-        { tm: 0.85, reps: 5 },
-        { tm: 0.75, reps: 5 },
-        { tm: 0.65, reps: 5 }
+        { tm: 0.85, reps: 5 }
     ],
     microCycle2: [
         { tm: 0.70, reps: 3 },
         { tm: 0.80, reps: 3 },
-        { tm: 0.90, reps: 3 },
-        { tm: 0.80, reps: 3 },
-        { tm: 0.70, reps: 3 }
+        { tm: 0.90, reps: 3 }
     ],
     microCycle3: [
         { tm: 0.75, reps: 5 },
         { tm: 0.85, reps: 3 },
-        { tm: 0.95, reps: 1 },
-        { tm: 0.85, reps: 3 },
-        { tm: 0.75, reps: 5 }
+        { tm: 0.95, reps: 1 }
     ],
     microCycle4: [
         { tm: 0.40, reps: 5 },
         { tm: 0.50, reps: 5 },
-        { tm: 0.60, reps: 5 },
-        { tm: 0.50, reps: 5 },
-        { tm: 0.40, reps: 5 }
+        { tm: 0.60, reps: 5 }
     ]
 };
+
+const jokerSet = {
+    // Add 10% to the tm for each new set
+    microCycle1: [
+        { tm: 0.935, reps: 5 },
+        { tm: 1.0285, reps: 5 },
+        { tm: 1.13135, reps: 5 },
+        { tm: 1.244485, reps: 5 }
+    ],
+    microCycle2: [
+        { tm: 0.99, reps: 3 },
+        { tm: 1.089, reps: 3 },
+        { tm: 1.1979, reps: 3 },
+        { tm: 1.31769, reps: 3 }
+    ],
+    microCycle3: [
+        { tm: 1.045, reps: 1 },
+        { tm: 1.1495, reps: 1 },
+        { tm: 1.26445, reps: 1 },
+        { tm: 1.390895, reps: 1 }
+    ]
+}
 
 Vue.component('primary-exercice-item', {
     props: ['element', 'repetionmax', 'trainingmax', 'roundvalue', 'unit'],
@@ -154,9 +172,25 @@ Vue.component('row-set-item', {
         <div v-if="typeof sets[index].tm !== 'undefined'" class="table__row table__row--set">
             <span class="item-number">{{ index + 1 }}</span>
             <p><span class="repet-number"> {{set.reps}} {{ isprimaryexercice && sets.length - 1 === index || index === 2 ? '+' : null }} </span> @ <span class="weight-item">{{ Math.ceil( ((exercice.tm) * (set.tm)) * 4) / 4 }}</span> {{ unit }}</p>   
-        </div>
+            </div>
         <div v-else class="table__row table__row--set table__row--set--lastAssistance">
             <p>{{ sets[index].sets }} sets of {{ sets[index].reps }} reps</p>
+        </div>
+    `
+})
+
+Vue.component('joker-set-item', {
+    props: {
+        element: Array,
+        index: Number,
+        exercice: Object,
+        unit: String,
+    },
+    template: `
+        <div class="table__row table__row--set table__row--set--joker">
+            <span class="item-number">{{ index + 1 }}</span>
+            <p><span class="repet-number"> {{ element[index].reps }} </span> @ <span class="weight-item"> {{ Math.ceil( ((exercice.tm) * (element[index].tm)) * 4) / 4 }} </span>{{ unit }}</p>   
+            <span class="joker-label">Joker</span>
         </div>
     `
 })
@@ -182,7 +216,8 @@ const app = new Vue({
         unit: "kg",
         microCycle: cycle.microCycle1,
         currentMicroCycle: "microCycle1",
-        trainingMaxPercentageForAssistance: 0.50
+        trainingMaxPercentageForAssistance: 0.50,
+        jokerSet: jokerSet
     },
     methods: {
         calculateTrainingMax: function(e, item) {
@@ -235,6 +270,9 @@ const app = new Vue({
                 }
                 this.exercices[key].rm = this.exercices[key].tm / 0.9
             }
+        },
+        increaseElementValueBy: function(element, percentageValue) {
+            return element + element * (percentageValue / 100);
         },
         toggleClass: function(e) {
             e.target.classList.toggle('active');
