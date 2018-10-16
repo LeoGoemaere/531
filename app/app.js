@@ -283,6 +283,7 @@ const app = new Vue({
         }
     },
     mounted: function() {
+        localStorage.clear();
         if (localStorage.getItem('exercices')) { 
             this.exercices = JSON.parse(localStorage.getItem('exercices'));
         }
