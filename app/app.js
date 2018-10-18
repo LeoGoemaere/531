@@ -118,25 +118,47 @@ const cycle = {
     ]
 };
 
+// const jokerSet = {
+//     // Add 10% to the tm for each new set
+//     microCycle1: [
+//         { tm: 0.935, reps: 5 },
+//         { tm: 1.0285, reps: 5 },
+//         { tm: 1.13135, reps: 5 },
+//         { tm: 1.244485, reps: 5 }
+//     ],
+//     microCycle2: [
+//         { tm: 0.99, reps: 3 },
+//         { tm: 1.089, reps: 3 },
+//         { tm: 1.1979, reps: 3 },
+//         { tm: 1.31769, reps: 3 }
+//     ],
+//     microCycle3: [
+//         { tm: 1.045, reps: 1 },
+//         { tm: 1.1495, reps: 1 },
+//         { tm: 1.26445, reps: 1 },
+//         { tm: 1.390895, reps: 1 }
+//     ]
+// }
+
 const jokerSet = {
-    // Add 10% to the tm for each new set
+    // Add 5% to the tm for each new set
     microCycle1: [
-        { tm: 0.935, reps: 5 },
-        { tm: 1.0285, reps: 5 },
-        { tm: 1.13135, reps: 5 },
-        { tm: 1.244485, reps: 5 }
+        { tm: 0.8925, reps: 5 },
+        { tm: 0.937125, reps: 5 },
+        { tm: 0.98398125, reps: 5 },
+        { tm: 1.03318031, reps: 5 }
     ],
     microCycle2: [
-        { tm: 0.99, reps: 3 },
-        { tm: 1.089, reps: 3 },
-        { tm: 1.1979, reps: 3 },
-        { tm: 1.31769, reps: 3 }
+        { tm: 0.945, reps: 3 },
+        { tm: 0.99225, reps: 3 },
+        { tm: 1.0418625, reps: 3 },
+        { tm: 1.09395562, reps: 3 }
     ],
     microCycle3: [
-        { tm: 1.045, reps: 1 },
-        { tm: 1.1495, reps: 1 },
-        { tm: 1.26445, reps: 1 },
-        { tm: 1.390895, reps: 1 }
+        { tm: 0.9975, reps: 1 },
+        { tm: 1.047375, reps: 1 },
+        { tm: 1.09974375, reps: 1 },
+        { tm: 1.15473094, reps: 1 }
     ]
 }
 
